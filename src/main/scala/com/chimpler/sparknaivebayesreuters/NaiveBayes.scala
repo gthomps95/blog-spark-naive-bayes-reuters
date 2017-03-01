@@ -11,9 +11,6 @@ import org.apache.spark.mllib.regression.LabeledPoint
 
 object NaiveBayesExample extends App with Logging {
 
-  log.info("test")
-  sys.exit()
-
   // 4 workers
   val sc = new SparkContext("local[4]", "naivebayes")
 
@@ -72,9 +69,17 @@ object NaiveBayesExample extends App with Logging {
       override def accept(dir: File, name: String) = name.endsWith(".sgm")
     })
 
+    log.info(inputFiles.length + "")
+
     val fullFileNames = inputFiles.map(directory + "/" + _)
     val docs = ReutersParser.parseAll(fullFileNames)
+
+    docs.foreach(d => log.info(s"${d.docId}, ${d.labels}, ${d.body.length}"))
+
     val termDocs = Tokenizer.tokenizeAll(docs)
+
+    termDocs.foreach(td => log.info(s"${td.doc}, ${td.labels}, ${td.terms.length}"))
+    sys.exit()
 
     // put collection in Spark
     val termDocsRdd = sc.parallelize[TermDoc](termDocs.toSeq)
