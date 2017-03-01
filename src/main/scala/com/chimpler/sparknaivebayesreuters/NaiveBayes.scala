@@ -11,8 +11,8 @@ import org.apache.spark.mllib.regression.LabeledPoint
 
 object NaiveBayesExample extends App with Logging {
 
-  log.debug("test")
-  System.exit(1)
+  log.info("test")
+  sys.exit()
 
   // 4 workers
   val sc = new SparkContext("local[4]", "naivebayes")
