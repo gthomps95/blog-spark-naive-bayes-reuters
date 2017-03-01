@@ -74,11 +74,11 @@ object NaiveBayesExample extends App with Logging {
     val fullFileNames = inputFiles.map(directory + "/" + _)
     val docs = ReutersParser.parseAll(fullFileNames)
 
-    docs.foreach(d => log.info(s"${d.docId}, ${d.labels}, ${d.body.length}"))
+    docs.take(5).foreach(d => log.info(s"${d.docId}, ${d.labels}, ${d.body.length}"))
 
     val termDocs = Tokenizer.tokenizeAll(docs)
 
-    termDocs.foreach(td => log.info(s"${td.doc}, ${td.labels}, ${td.terms.length}"))
+    termDocs.take(5).foreach(td => log.info(s"${td.doc}, ${td.labels}, ${td.terms.length}"))
     sys.exit()
 
     // put collection in Spark
