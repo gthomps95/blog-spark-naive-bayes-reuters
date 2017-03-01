@@ -3,13 +3,17 @@ package com.chimpler.sparknaivebayesreuters
 import java.io.{File, FilenameFilter}
 
 import com.gravity.goose.{Configuration, Goose}
+import com.typesafe.scalalogging.slf4j.Logging
 import jline.ConsoleReader
 import org.apache.spark.SparkContext
 import org.apache.spark.mllib.classification.{NaiveBayes, NaiveBayesModel}
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
 
-object NaiveBayesExample extends App {
+object NaiveBayesExample extends App with Logging {
+
+  logger.debug("test")
+  System.exit(1)
 
   // 4 workers
   val sc = new SparkContext("local[4]", "naivebayes")
